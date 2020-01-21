@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+#include<string.h>
+using namespace std;
+
+string genKey(string str,string key){
+	int x=str.size();
+	for (int i = 0; ; i++) 
+	{ 
+		if (x == i) 
+			i = 0; 
+		if (key.size()==str.size()) 
+			break; 
+		key.push_back(key[i]);
+	} 
+	return key; 
+}
+string cipText(string str, string key) 
+{ 
+	string cipher_text; 
+
+	for (int i = 0; i < str.size(); i++) 
+	{ 
+															
+		int x = (str[i] + key[i]) %26; 
+		x += 'A'; 
+
+		cipher_text.push_back(x); 
+	} 
+	return cipher_text; 
+} 
+string originalText(string cipher_text, string key) 
+{ 
+	string orig_text; 
+
+	for (int i = 0 ; i < cipher_text.size(); i++) 
+	{ 
+		int x = (cipher_text[i] - key[i] + 26) %26; 
+
+		 
+		x += 'A'; 
+		orig_text.push_back(x); 
+	} 
+	return orig_text; 
+} 
+
+ 
+
+int main() 
+{ 
+	 
+	string keyword = "SAURABH"; 
+	string str = "GODISGREAT";
+	
+	cout<<"POLYALPHABATIC CIPHER"<<endl;
+	cout<<"\n";
+	cout<<"\n";
+	string key = genKey(str, keyword); 
+	string cipher_text = cipText(str, key); 
+	cout<<"PlainText :"<<str<<endl;
+
+	cout <<"Encrypted Message: "<< cipher_text << "\n"; 
+
+	cout <<"Decrypted Message : "<< originalText(cipher_text, key); 
+	return 0; 
+}
